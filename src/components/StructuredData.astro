@@ -1,0 +1,107 @@
+---
+import { SITE, HERO_IMAGE_URL } from '../consts';
+
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: SITE.title,
+  description: SITE.description,
+  url: SITE.url,
+  inLanguage: 'en-US',
+  dateModified: SITE.asOfDate,
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: HERO_IMAGE_URL,
+    contentUrl: HERO_IMAGE_URL,
+  },
+  isPartOf: {
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+  },
+};
+
+const product = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'aiwaitress.com Domain Name',
+  description:
+    'Premium domain name aiwaitress.com available for acquisition. A clever, memorable name for personalized AI service, hospitality tech, recommendation engines, and anticipatory customer experiences.',
+  url: SITE.url,
+  image: HERO_IMAGE_URL,
+  brand: {
+    '@type': 'Brand',
+    name: 'aiwaitress.com',
+  },
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    url: SITE.url,
+    priceCurrency: 'USD',
+    price: 8888,
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      price: 8888,
+      priceCurrency: 'USD',
+    },
+    seller: {
+      '@type': 'Organization',
+      name: 'Desert Rich',
+      email: SITE.email,
+    },
+    hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'US',
+      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      merchantReturnDays: 7,
+      name: '7-Day Return Window',
+      description: 'Domain name transfers include a 7-day return window for undisclosed defects only. Returns not applicable after domain transfer is complete.',
+    },
+    shippingDetails: {
+      '@type': 'OfferShippingDetails',
+      shippingRate: {
+        '@type': 'MonetaryAmount',
+        value: 0,
+        currency: 'USD',
+      },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: {
+          '@type': 'QuantitativeValue',
+          minValue: 1,
+          maxValue: 5,
+          unitCode: 'DAY',
+        },
+        transitTime: {
+          '@type': 'QuantitativeValue',
+          minValue: 0,
+          maxValue: 1,
+          unitCode: 'DAY',
+        },
+      },
+      shippingDestination: {
+        '@type': 'DefinedRegion',
+        addressCountry: 'US',
+      },
+    },
+  },
+};
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'aiwaitress.com',
+  url: SITE.url,
+  logo: HERO_IMAGE_URL,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: SITE.email,
+    availableLanguage: ['English'],
+  },
+};
+
+const graph = { '@context': 'https://schema.org', '@graph': [webPage, product, organization] };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

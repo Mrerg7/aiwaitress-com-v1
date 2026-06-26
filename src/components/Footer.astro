@@ -35,10 +35,10 @@ const mailto = acquisitionMailto('aiwaitress.com — Domain Acquisition');
                 <dt class="text-[10px] tracking-widest text-white/40 uppercase">Status</dt>
                 <dd class="mt-1 font-semibold text-emerald-400">Available now</dd>
               </div>
-              <div class="rounded-2xl border border-white/10 bg-black/40 px-4 py-3">
+              <div class="rounded-2xl border border-white/10 bg-black/40 px-4 py-3 min-w-0">
                 <dt class="text-[10px] tracking-widest text-white/40 uppercase">Contact</dt>
-                <dd class="mt-1 font-semibold text-white">
-                  <a href={mailto} class="text-[#22f5ff] transition hover:text-white">
+                <dd class="mt-1 font-semibold text-white truncate">
+                  <a href={mailto} class="text-[#22f5ff] transition hover:text-white" title={SITE.email}>
                     {SITE.email}
                   </a>
                 </dd>

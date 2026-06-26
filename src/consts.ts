@@ -32,7 +32,7 @@ export function heroImageAbsoluteUrl(siteUrl: string = SITE.url): string {
   return HERO_IMAGE_URL;
 }
 
-export const GOOGLE_SITE_VERIFICATION = 'zQNyCzNQuvIOkIVrEskDnhwgRSvY8Cz4AQ5U2GFJIHw';
+export const GOOGLE_SITE_VERIFICATION = 'CAaaB6WqHxQ88xqtGX3-fbZWuI8vIZjE_RyBwU1HHNA';
 
 export function acquisitionMailto(subject?: string): string {
   const params = new URLSearchParams({

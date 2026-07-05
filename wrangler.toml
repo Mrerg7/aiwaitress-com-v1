@@ -1,9 +1,11 @@
 name = "aiwaitress-com-v1"
+main = "src/worker.ts"
 compatibility_date = "2026-06-01"
-pages_build_output_dir = "dist"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true
 
 [observability]
 enabled = true

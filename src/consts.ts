@@ -3,7 +3,7 @@ export const SITE = {
   title: 'aiwaitress.com | AI That Already Knows What You Like — Premium Domain',
   description:
     'aiwaitress.com — One day AI will already know what you like and ask if you want it. A clever, SEO-friendly premium domain for personalized AI service, hospitality tech, recommendation engines, and anticipatory customer experiences.',
-  url: 'https://aiwaitress.com',
+  url: 'https://aiwaitress.com/',
   locale: 'en_US',
   email: 'sales@desertrich.com',
   year: 2026,

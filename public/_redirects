@@ -1,2 +1,8 @@
+http://aiwaitress.com https://aiwaitress.com/ 301
+http://aiwaitress.com/* https://aiwaitress.com/:splat 301
+http://www.aiwaitress.com https://aiwaitress.com/ 301
+http://www.aiwaitress.com/* https://aiwaitress.com/:splat 301
+https://www.aiwaitress.com https://aiwaitress.com/ 301
+https://www.aiwaitress.com/* https://aiwaitress.com/:splat 301
+https://aiwaitress.com https://aiwaitress.com/ 301
 /index.html / 301
-/404 /404/ 301

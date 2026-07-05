@@ -22,7 +22,12 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+const siteOrigin = Astro.site ?? SITE.url;
+const pathname =
+  Astro.url.pathname === '/' || Astro.url.pathname.endsWith('/')
+    ? Astro.url.pathname
+    : `${Astro.url.pathname}/`;
+const canonical = new URL(pathname, siteOrigin).href;
 ---
 
 <!doctype html>

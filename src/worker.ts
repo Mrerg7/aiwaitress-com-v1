@@ -31,6 +31,18 @@ export default {
     const redirect = canonicalRedirect(request);
     if (redirect) return redirect;
 
-    return env.ASSETS.fetch(request);
+    const assetsResponse = await env.ASSETS.fetch(request);
+
+    if (assetsResponse.status === 404) {
+      const notFoundPage = await env.ASSETS.fetch(
+        new Request(new URL('/404.html', request.url)),
+      );
+      return new Response(notFoundPage.body, {
+        status: 404,
+        headers: notFoundPage.headers,
+      });
+    }
+
+    return assetsResponse;
   },
 } satisfies ExportedHandler<Env>;

@@ -16,6 +16,10 @@
     @apply bg-[#0a0a0f] text-white antialiased overflow-x-hidden;
     font-family: var(--font-sans);
   }
+
+  a, button, input, select, textarea {
+    touch-action: manipulation;
+  }
 }
 
 @layer utilities {
@@ -36,7 +40,13 @@
     background-image: linear-gradient(rgba(10, 10, 15, 0.65), rgba(10, 10, 15, 0.72)), url('https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/2ea60d2d-18ca-4613-9931-cba40fe9fa00/public');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
+  }
+
+  @media (min-width: 768px) {
+    .hero-bg {
+      background-attachment: fixed;
+    }
   }
 
   .glass {

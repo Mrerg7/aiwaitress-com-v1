@@ -21,6 +21,18 @@ import AcquisitionCTA from './AcquisitionCTA.astro';
     </div>
 
     <div class="flex items-center gap-x-3">
+      <button
+        type="button"
+        id="mobile-menu-button"
+        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-xl border border-white/15 text-white/80 hover:bg-white/5 md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open navigation menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
       <a
         href="#inquire"
         class="hidden items-center gap-x-2 rounded-2xl border border-white/20 px-6 py-2.5 text-sm font-semibold transition-all hover:bg-white/5 min-h-[44px] sm:inline-flex"
@@ -35,10 +47,40 @@ import AcquisitionCTA from './AcquisitionCTA.astro';
       />
     </div>
   </div>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0a0a0f]/98 md:hidden">
+    <div class="mx-auto flex max-w-6xl flex-col px-6 py-4 text-sm font-medium">
+      <a href="#concept" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">The Concept</a>
+      <a href="#why" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Why This Domain</a>
+      <a href="#uses" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Ideal For</a>
+      <a href="#pricing" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Pricing</a>
+      <a href="#inquire" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Inquire</a>
+    </div>
+  </div>
 </nav>
 
 <script>
   const nav = document.getElementById('nav');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  const setMobileMenuOpen = (open: boolean) => {
+    if (!mobileMenu || !mobileMenuButton) return;
+    mobileMenu.classList.toggle('hidden', !open);
+    mobileMenuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+    mobileMenuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  };
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      setMobileMenuOpen(mobileMenu.classList.contains('hidden'));
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMobileMenuOpen(false));
+    });
+  }
+
   if (nav) {
     const onScroll = () => {
       nav.classList.toggle('nav-scrolled', window.scrollY > 60);

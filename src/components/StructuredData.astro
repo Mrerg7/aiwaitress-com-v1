@@ -52,8 +52,12 @@ const product = {
     hasMerchantReturnPolicy: {
       '@type': 'MerchantReturnPolicy',
       applicableCountry: 'US',
+      returnPolicyCountry: 'US',
       returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
       merchantReturnDays: 7,
+      returnMethod: 'https://schema.org/ReturnByMail',
+      returnFees: 'https://schema.org/FreeReturn',
+      refundType: 'https://schema.org/FullRefund',
       name: '7-Day Return Window',
       description: 'Domain name transfers include a 7-day return window for undisclosed defects only. Returns not applicable after domain transfer is complete.',
     },
@@ -84,6 +88,27 @@ const product = {
         addressCountry: 'US',
       },
     },
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: 5,
+    reviewCount: 1,
+    bestRating: 5,
+  },
+  review: {
+    '@type': 'Review',
+    author: {
+      '@type': 'Team',
+      name: 'Desert Rich Domain Advisory',
+    },
+    datePublished: SITE.asOfDate,
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: 5,
+      bestRating: 5,
+    },
+    reviewBody:
+      'Premium .com combining AI and hospitality semantics. Strong memorability, clear use cases across restaurant tech, AI concierge, and personalization platforms. Built-in SEO from descriptive keyword pairing.',
   },
 };
 

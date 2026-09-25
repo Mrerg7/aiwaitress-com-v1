@@ -6,7 +6,7 @@ import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/600.css';
 import '../styles/global.css';
 import StructuredData from '../components/StructuredData.astro';
-import { SITE, GOOGLE_SITE_VERIFICATION, HERO_IMAGE_URL } from '../consts';
+import { SITE, GOOGLE_SITE_VERIFICATION, HERO_IMAGE_URL, HERO_IMAGE_DIMENSIONS } from '../consts';
 
 interface Props {
   title?: string;
@@ -51,8 +51,8 @@ const canonical = new URL(pathname, siteOrigin).href;
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:secure_url" content={ogImage} />
     <meta property="og:image:alt" content="aiwaitress.com premium domain — AI that knows what you like" />
-    <meta property="og:image:width" content="1366" />
-    <meta property="og:image:height" content="745" />
+    <meta property="og:image:width" content={String(HERO_IMAGE_DIMENSIONS.width)} />
+    <meta property="og:image:height" content={String(HERO_IMAGE_DIMENSIONS.height)} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -62,7 +62,7 @@ const canonical = new URL(pathname, siteOrigin).href;
 
     <meta name="theme-color" content="#0a0a0f" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href={HERO_IMAGE_URL} as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href={HERO_IMAGE_URL} as="image" fetchpriority="high" />
 
     <StructuredData />
   </head>

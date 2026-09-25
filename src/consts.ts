@@ -1,13 +1,13 @@
 export const SITE = {
   name: 'aiwaitress.com',
-  title: 'aiwaitress.com | AI That Already Knows What You Like — Premium Domain',
+  title: 'aiwaitress.com — Premium AI Waitress Domain for Sale',
   description:
-    'aiwaitress.com — One day AI will already know what you like and ask if you want it. A clever, SEO-friendly premium domain for personalized AI service, hospitality tech, recommendation engines, and anticipatory customer experiences.',
+    'aiwaitress.com is for sale — a clever premium .com for AI concierge, hospitality tech, and recommendation platforms. Escrow-protected, instant transfer.',
   url: 'https://aiwaitress.com/',
   locale: 'en_US',
   email: 'sales@desertrich.com',
   year: 2026,
-  asOfDate: '2026-06-01',
+  asOfDate: '2026-09-25',
 } as const;
 
 /** Cloudflare Images CDN — hero image for og:image and structured data. */
@@ -35,19 +35,17 @@ export function heroImageAbsoluteUrl(siteUrl: string = SITE.url): string {
 export const GOOGLE_SITE_VERIFICATION = 'CAaaB6WqHxQ88xqtGX3-fbZWuI8vIZjE_RyBwU1HHNA';
 
 export function acquisitionMailto(subject?: string): string {
-  const params = new URLSearchParams({
-    subject: subject ?? 'aiwaitress.com — Domain Acquisition Inquiry',
-    body: [
-      'Hello,',
-      '',
-      'I am interested in acquiring aiwaitress.com.',
-      '',
-      'Organization:',
-      'Intended use:',
-      'Budget range:',
-      '',
-      'Thank you,',
-    ].join('\n'),
-  });
-  return `mailto:${SITE.email}?${params.toString()}`;
+  const body = [
+    'Hello,',
+    '',
+    'I am interested in acquiring aiwaitress.com.',
+    '',
+    'Organization:',
+    'Intended use:',
+    'Budget range:',
+    '',
+    'Thank you,',
+  ].join('\n');
+  const encoded = `subject=${encodeURIComponent(subject ?? 'aiwaitress.com — Domain Acquisition Inquiry')}&body=${encodeURIComponent(body)}`;
+  return `mailto:${SITE.email}?${encoded}`;
 }

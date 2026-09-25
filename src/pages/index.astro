@@ -4,7 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import AcquisitionCTA from '../components/AcquisitionCTA.astro';
-import { SITE } from '../consts';
+import MobileCTA from '../components/MobileCTA.astro';
+import { HERO_IMAGE_URL, HERO_IMAGE_DIMENSIONS, SITE } from '../consts';
+import { FAQS } from '../data/faqs';
 
 const [features, useCases] = await Promise.all([
   getCollection('features'),
@@ -26,11 +28,22 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
 
 <BaseLayout>
   <Nav />
+  <MobileCTA />
 
   <main>
     <!-- Hero Section -->
-    <section class="hero-bg relative flex min-h-screen items-center pt-20">
-      <div class="mx-auto max-w-5xl px-6 pb-16 pt-12 md:pt-8 text-center relative z-10">
+    <section class="relative flex min-h-screen items-center overflow-hidden pt-20">
+      <img
+        src={HERO_IMAGE_URL}
+        alt="Premium domain aiwaitress.com — anticipatory AI service that already knows what you like"
+        width={HERO_IMAGE_DIMENSIONS.width}
+        height={HERO_IMAGE_DIMENSIONS.height}
+        fetchpriority="high"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      <div class="hero-overlay absolute inset-0" aria-hidden="true"></div>
+      <div class="relative z-10 mx-auto w-full max-w-5xl px-6 pb-16 pt-12 text-center md:pt-8">
         <!-- Premium Badge -->
         <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8">
           <div class="w-1.5 h-1.5 bg-[#22f5ff] rounded-full animate-pulse"></div>
@@ -69,7 +82,7 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
           </a>
         </div>
 
-        <div class="mt-12 flex items-center justify-center gap-x-8 text-xs text-white/50">
+        <div class="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-white/55">
           <div class="flex items-center gap-x-1.5">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7" />
@@ -83,7 +96,7 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
 
       <!-- Scroll indicator -->
       <div class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block">
-        <div class="flex flex-col items-center gap-y-1 text-[10px] tracking-widest text-white/40">
+        <div class="flex flex-col items-center gap-y-1 text-[10px] tracking-widest text-white/55">
           <div>SCROLL TO BEGIN</div>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7" />
@@ -204,12 +217,12 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
         <h2 class="section-header tracking-[-0.03em]">A clever name with built-in appeal.</h2>
       </div>
 
-      <div class="glass rounded-3xl p-10 md:p-14 border border-white/10">
+      <div class="glass rounded-3xl p-7 sm:p-10 md:p-14 border border-white/10">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-8">
           <div>
             <div class="flex items-baseline gap-x-2">
-              <span class="text-7xl font-semibold tracking-tighter">$8,888</span>
-              <span class="text-white/50 text-xl">USD</span>
+              <span class="text-5xl font-semibold tracking-tighter sm:text-7xl">$8,888</span>
+              <span class="text-white/55 text-xl">USD</span>
             </div>
             <p class="mt-1 text-white/60">One-time acquisition &bull; Full ownership &amp; instant transfer</p>
 
@@ -278,8 +291,29 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section id="faq" class="bg-white/5 border-y border-white/10 py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <div class="inline-block px-4 py-1 rounded-full bg-white/5 text-xs tracking-[1.5px] font-medium text-white/60 mb-3">FAQ</div>
+          <h2 class="section-header tracking-[-0.03em]">Questions buyers ask first.</h2>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          {
+            FAQS.map(({ question, answer }) => (
+              <div class="glass rounded-3xl p-7 border border-white/10">
+                <h3 class="font-semibold text-lg tracking-tight mb-2">{question}</h3>
+                <p class="text-[15px] leading-relaxed text-white/70">{answer}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <!-- Inquiry / Contact Section -->
-    <section id="inquire" class="bg-white/5 border-t border-white/10 py-16">
+    <section id="inquire" class="bg-white/5 py-16">
       <div class="max-w-2xl mx-auto px-6">
         <div class="text-center mb-10">
           <h2 class="text-4xl font-semibold tracking-tight">Ready to own the AI Waitress?</h2>
@@ -291,28 +325,28 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
             <div>
               <label for="name" class="block text-xs tracking-widest font-medium text-white/60 mb-1.5">FULL NAME</label>
               <input type="text" id="name" required
-                     class="form-input w-full bg-white/5 border border-white/15 rounded-2xl px-5 py-3.5 text-white placeholder:text-white/40">
+                     class="form-input w-full bg-white/5 border border-white/15 rounded-2xl px-5 py-3.5 text-white placeholder:text-white/50">
             </div>
             <div>
               <label for="email" class="block text-xs tracking-widest font-medium text-white/60 mb-1.5">EMAIL ADDRESS</label>
               <input type="email" id="email" required
-                     class="form-input w-full bg-white/5 border border-white/15 rounded-2xl px-5 py-3.5 text-white placeholder:text-white/40">
+                     class="form-input w-full bg-white/5 border border-white/15 rounded-2xl px-5 py-3.5 text-white placeholder:text-white/50">
             </div>
           </div>
 
           <div>
             <label for="org" class="block text-xs tracking-widest font-medium text-white/60 mb-1.5">ORGANIZATION OR INTENDED USE (OPTIONAL)</label>
             <input type="text" id="org"
-                   class="form-input w-full bg-white/5 border border-white/15 rounded-2xl px-5 py-3.5 text-white placeholder:text-white/40">
+                   class="form-input w-full bg-white/5 border border-white/15 rounded-2xl px-5 py-3.5 text-white placeholder:text-white/50">
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label for="offer" class="block text-xs tracking-widest font-medium text-white/60 mb-1.5">YOUR OFFER (OPTIONAL)</label>
               <div class="relative">
-                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-white/40">$</span>
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-white/55">$</span>
                 <input type="text" id="offer" placeholder="8888"
-                       class="form-input w-full bg-white/5 border border-white/15 rounded-2xl pl-8 pr-5 py-3.5 text-white placeholder:text-white/40">
+                       class="form-input w-full bg-white/5 border border-white/15 rounded-2xl pl-8 pr-5 py-3.5 text-white placeholder:text-white/50">
               </div>
             </div>
             <div>
@@ -330,7 +364,7 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
           <div>
             <label for="message" class="block text-xs tracking-widest font-medium text-white/60 mb-1.5">MESSAGE OR QUESTIONS</label>
             <textarea id="message" rows="4" placeholder="What is your vision for aiwaitress.com?"
-                      class="form-input w-full bg-white/5 border border-white/15 rounded-3xl px-5 py-4 text-white placeholder:text-white/40 resize-y min-h-[110px]"></textarea>
+                      class="form-input w-full bg-white/5 border border-white/15 rounded-3xl px-5 py-4 text-white placeholder:text-white/50 resize-y min-h-[110px]"></textarea>
           </div>
 
           <button type="submit"
@@ -349,9 +383,16 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21V3" />
             </svg>
           </div>
-          <h3 class="text-2xl font-semibold tracking-tight mb-2">Inquiry Received</h3>
-          <p class="text-white/70 max-w-xs mx-auto">Thank you. A member of our team will personally respond within 24 hours to discuss next steps.</p>
-          <button onclick="resetForm()"
+          <h3 class="text-2xl font-semibold tracking-tight mb-2">Your email app is opening</h3>
+          <p class="text-white/70 max-w-sm mx-auto">
+            We pre-filled an email with your inquiry. Press <span class="font-semibold text-white">Send</span> there and
+            it reaches us directly — we reply to serious buyers within 24 hours.
+          </p>
+          <p class="mt-3 text-sm text-white/55">
+            Nothing opened?
+            <a id="retry-mail" href="mailto:sales@desertrich.com" class="font-medium text-[#22f5ff] underline underline-offset-4">Click here to email us</a>
+          </p>
+          <button id="reset-form-btn" type="button"
                   class="mt-6 text-sm font-medium text-white/60 hover:text-white underline underline-offset-4">Submit another inquiry</button>
         </div>
       </div>
@@ -370,62 +411,95 @@ const colorMap: Record<string, { bg: string; stroke: string; text: string }> = {
 </BaseLayout>
 
 <script>
-  function initForm() {
-    const form = document.getElementById('inquiry-form');
-    const successMsg = document.getElementById('success-message');
+  const form = document.getElementById('inquiry-form');
+  const successMsg = document.getElementById('success-message');
+  const resetBtn = document.getElementById('reset-form-btn');
+  const retryMail = document.getElementById('retry-mail');
+
+  const field = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null)?.value?.trim() || '';
+
+  function buildMailto(): string {
+    const body = [
+      'Hello,',
+      '',
+      'I would like to inquire about acquiring aiwaitress.com.',
+      '',
+      `Name: ${field('name')}`,
+      `Email: ${field('email')}`,
+      `Organization / intended use: ${field('org') || '—'}`,
+      `Offer (USD): ${field('offer') || '—'}`,
+      `Timeline: ${field('timeline') || '—'}`,
+      '',
+      'Message:',
+      field('message') || '—',
+      '',
+      'Thank you,',
+    ].join('\n');
+
+    const subject = 'aiwaitress.com — Domain Acquisition Inquiry';
+    return `mailto:sales@desertrich.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  function showSuccess() {
     if (!form || !successMsg) return;
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = 'Processing...';
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        form.style.display = 'none';
-        successMsg.classList.remove('hidden');
-        successMsg.classList.add('block');
-
-        console.log('%c[aiwaitress.com] New inquiry submitted:', 'color:#64748b', {
-          name: (document.getElementById('name') as HTMLInputElement)?.value,
-          email: (document.getElementById('email') as HTMLInputElement)?.value,
-          org: (document.getElementById('org') as HTMLInputElement)?.value,
-          offer: (document.getElementById('offer') as HTMLInputElement)?.value,
-          timeline: (document.getElementById('timeline') as HTMLSelectElement)?.value,
-          message: (document.getElementById('message') as HTMLTextAreaElement)?.value,
-        });
-      }, 850);
-    });
+    const href = buildMailto();
+    if (retryMail) retryMail.setAttribute('href', href);
+    form.style.display = 'none';
+    successMsg.classList.remove('hidden');
+    successMsg.classList.add('block');
+    window.location.href = href;
   }
 
   function resetForm() {
-    const form = document.getElementById('inquiry-form');
-    const successMsg = document.getElementById('success-message');
     if (!form || !successMsg) return;
-
     successMsg.classList.add('hidden');
     successMsg.classList.remove('block');
     form.style.display = 'block';
-    (form as HTMLFormElement).reset();
-
-    const submitBtn = form.querySelector('button[type="submit"]');
+    form.reset();
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = 'Submit Secure Inquiry';
+      submitBtn.textContent = 'Submit Secure Inquiry';
     }
+    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      if (submitBtn) {
+        submitBtn.textContent = 'Opening your email…';
+        submitBtn.disabled = true;
+      }
+      showSuccess();
+    });
+  }
+
+  resetBtn?.addEventListener('click', resetForm);
+
+  // Hide the sticky mobile CTA while the inquiry form is on screen so it
+  // never covers the submit button or competes with the form.
+  const inquireSection = document.getElementById('inquire');
+  const mobileCta = document.getElementById('mobile-cta');
+  if (inquireSection && mobileCta && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        mobileCta.classList.toggle('translate-y-full', entry.isIntersecting);
+      },
+      { threshold: 0.05 },
+    );
+    observer.observe(inquireSection);
   }
 
   // Keyboard accessibility
-  document.addEventListener('keydown', function(e) {
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       const mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
         mobileMenu.classList.add('hidden');
+        document.getElementById('mobile-menu-button')?.setAttribute('aria-expanded', 'false');
       }
     }
   });
-
-  initForm();
 </script>

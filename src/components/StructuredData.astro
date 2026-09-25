@@ -1,5 +1,6 @@
 ---
 import { SITE, HERO_IMAGE_URL } from '../consts';
+import { FAQS } from '../data/faqs';
 
 const webPage = {
   '@context': 'https://schema.org',
@@ -15,15 +16,14 @@ const webPage = {
     contentUrl: HERO_IMAGE_URL,
   },
   isPartOf: {
-    '@type': 'WebSite',
-    name: SITE.name,
-    url: SITE.url,
+    '@id': `${SITE.url}#website`,
   },
 };
 
 const product = {
   '@context': 'https://schema.org',
   '@type': 'Product',
+  '@id': `${SITE.url}#product`,
   name: 'aiwaitress.com Domain Name',
   description:
     'Premium domain name aiwaitress.com available for acquisition. A clever, memorable name for personalized AI service, hospitality tech, recommendation engines, and anticipatory customer experiences.',
@@ -89,35 +89,29 @@ const product = {
       },
     },
   },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: 5,
-    reviewCount: 1,
-    bestRating: 5,
-  },
-  review: {
-    '@type': 'Review',
-    author: {
-      '@type': 'Organization',
-      name: 'Desert Rich Domain Advisory',
-    },
-    datePublished: SITE.asOfDate,
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue: 5,
-      bestRating: 5,
-    },
-    reviewBody:
-      'Premium .com combining AI and hospitality semantics. Strong memorability, clear use cases across restaurant tech, AI concierge, and personalization platforms. Built-in SEO from descriptive keyword pairing.',
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${SITE.url}#website`,
+  name: 'aiwaitress.com',
+  url: SITE.url,
+  inLanguage: 'en-US',
+  description: SITE.description,
+  publisher: {
+    '@id': `${SITE.url}#organization`,
   },
 };
 
 const organization = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'aiwaitress.com',
+  '@id': `${SITE.url}#organization`,
+  name: 'Desert Rich',
+  alternateName: 'aiwaitress.com',
   url: SITE.url,
   logo: HERO_IMAGE_URL,
+  email: SITE.email,
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
@@ -126,7 +120,22 @@ const organization = {
   },
 };
 
-const graph = { '@context': 'https://schema.org', '@graph': [webPage, product, organization] };
+const faqPage = {
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: answer,
+    },
+  })),
+};
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [webPage, website, product, organization, faqPage],
+};
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(graph)} />

@@ -4,7 +4,7 @@ import AcquisitionCTA from './AcquisitionCTA.astro';
 
 <nav class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 border-b border-white/5" id="nav">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 h-20">
-    <a href="/" class="flex items-center gap-x-3" aria-label="aiwaitress.com home">
+    <a href="/" class="flex min-h-[44px] items-center gap-x-3" aria-label="aiwaitress.com home">
       <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-[#22f5ff] via-[#a855f7] to-[#22f5ff] p-px">
         <div class="w-full h-full bg-[#0a0a0f] rounded-2xl flex items-center justify-center">
           <span class="text-[#22f5ff] text-xl font-bold tracking-tighter">AI</span>
@@ -13,18 +13,19 @@ import AcquisitionCTA from './AcquisitionCTA.astro';
       <div class="font-display text-2xl font-semibold tracking-tighter">aiwaitress.com</div>
     </a>
 
-    <div class="hidden items-center gap-x-9 text-sm font-medium md:flex">
+    <div class="hidden items-center gap-x-9 text-sm font-medium lg:flex">
       <a href="#concept" class="inline-flex items-center min-h-[44px] text-white/80 hover:text-[#22f5ff] transition-all">The Concept</a>
       <a href="#why" class="inline-flex items-center min-h-[44px] text-white/80 hover:text-[#22f5ff] transition-all">Why This Domain</a>
       <a href="#uses" class="inline-flex items-center min-h-[44px] text-white/80 hover:text-[#22f5ff] transition-all">Ideal For</a>
       <a href="#pricing" class="inline-flex items-center min-h-[44px] text-white/80 hover:text-[#22f5ff] transition-all">Pricing</a>
+      <a href="#faq" class="inline-flex items-center min-h-[44px] text-white/80 hover:text-[#22f5ff] transition-all">FAQ</a>
     </div>
 
     <div class="flex items-center gap-x-3">
       <button
         type="button"
         id="mobile-menu-button"
-        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-xl border border-white/15 text-white/80 hover:bg-white/5 md:hidden"
+        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-xl border border-white/15 text-white/80 hover:bg-white/5 lg:hidden"
         aria-expanded="false"
         aria-controls="mobile-menu"
         aria-label="Open navigation menu"
@@ -39,21 +40,24 @@ import AcquisitionCTA from './AcquisitionCTA.astro';
       >
         Inquire
       </a>
-      <AcquisitionCTA
-        label="Secure Now"
-        variant="primary"
-        class="!px-6 !py-2.5 !text-sm !min-h-[44px]"
-        subject="aiwaitress.com — Acquisition Inquiry"
-      />
+      <div class="hidden items-center sm:flex">
+        <AcquisitionCTA
+          label="Secure Now"
+          variant="primary"
+          class="!px-6 !py-2.5 !text-sm !min-h-[44px]"
+          subject="aiwaitress.com — Acquisition Inquiry"
+        />
+      </div>
     </div>
   </div>
 
-  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0a0a0f]/98 md:hidden">
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0a0a0f]/98 lg:hidden">
     <div class="mx-auto flex max-w-6xl flex-col px-6 py-4 text-sm font-medium">
       <a href="#concept" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">The Concept</a>
       <a href="#why" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Why This Domain</a>
       <a href="#uses" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Ideal For</a>
       <a href="#pricing" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Pricing</a>
+      <a href="#faq" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">FAQ</a>
       <a href="#inquire" class="inline-flex min-h-[44px] items-center text-white/80 hover:text-[#22f5ff] transition-all">Inquire</a>
     </div>
   </div>
